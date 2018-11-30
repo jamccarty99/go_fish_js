@@ -1,7 +1,6 @@
-class CardView {
-  constructor(card, callBack) {
+class OpponentCardView {
+  constructor(card) {
     this._card = card
-    this._callBack = callBack
   }
 
   card() {
@@ -10,13 +9,12 @@ class CardView {
 
   draw(container) {
     const cardMarkup =`
-      <div class="hand-card selectable">
-        ${this.card().rank()} of ${this.card().suit()}
+      <div class="hand-card">
+        Playing Card
       </div>
     `
     const element = document.createElement('div')
     element.innerHTML = cardMarkup
-    element.onclick = this._callBack.bind(this)
     container.appendChild(element)
 
   }

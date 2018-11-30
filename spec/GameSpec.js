@@ -77,9 +77,13 @@ describe("Game", function() {
       expect(game.turn()).toEqual(1);
     });
 
-    xit("tells next player to go fish if their hand is empty", function() {
-      game.start();
-      expect(game.currentPlayer().name()).toMatch('Player 1');
+    it("tells next player to go fish if their hand is empty", function() {
+      card = new PlayingCard('Ace', 'Spades')
+      game._createPlayers();
+      game.players()[0].addCards([card, card])
+      expect(game.turn()).toEqual(0);
+      game.nextPlayer();
+      expect(game.turn()).toEqual(2);
     });
   });
 
@@ -89,10 +93,10 @@ describe("Game", function() {
       game.goFishing();
     });
 
-    // xit('takes a card from the deck', function() {
-    //   expect(game.players()[0].handCount()).toEqual(8);
-    //   expect{ game.goFishing()) }.to change { player2.hand_count }.by 1
-    // });
+    xit('takes a card from the deck', function() {
+      expect(game.players()[0].handCount()).toEqual(8);
+      // expect{ game.goFishing()) }.to change { player2.hand_count }.by 1
+    });
 
     // it('goes to the next round after fishing', function() {
     //   expect(go_fish.current_player.name).to eq('player2')
@@ -104,15 +108,25 @@ describe("Game", function() {
     //   expect(player2.hand_count).to be(7)
     // });
   });
+
+  describe("playRound", function() {
+    it('current_user (not player) can play a round with successful fish', function() {
+      card = new PlayingCard('Ace', 'Spades')
+      game._createPlayers();
+      game.players()[0].addCards([card, card])
+      game.playRound(game.players()[1], '2')
+      expect(game.currentPlayer().handCount()).not.toEqual(2);
+    });
+    //it('current_user (not player) can play a round with successful fish') do
+  //       go_fish.play_round(player2.name, player2.send(:hand)[0].rank)
+  //       expect(go_fish.current_player.hand_count).to_not be(7)
+  //     end
+  //
+  //     it 'changes the number of cards the current player has' do
+  //       expect{ go_fish.play_round('player2', 'Ace') }.to change(player1, :hand_count)
+  //     end
+  });
 });
-// describe '#next_player' do
-//     it 'tells next player to go fish if their hand is empty' do
-//       player2.send(:hand=, [])
-//       go_fish.send(:go_fishing)
-//       expect(go_fish.current_player.name).to eq('player1')
-//     end
-//   end
-//
 //   describe '#card_transfer' do
 //     it("transfers card(s) from requested to current_player") do
 //       go_fish.start

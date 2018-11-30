@@ -57,30 +57,12 @@ class Player {
 //     value_array.max
 //   end
 //
-//   def as_json
-//     {
-//       'name' => name,
-//       'hand' => hand.map(&:as_json),
-//       'sets' => sets
-//     }
-//   end
-//
-//   def self.from_json(player_json)
-//     Player.new(
-//       player_json['name'],
-//       PlayingCard.collection_from_data(player_json['hand']),
-//       player_json['sets']
-//     )
-//   end
+
 //
 //   def self.collection_from_data(data)
 //     data.map{ |player_data| Player.from_json(player_data)}
 //   end
 //
-//   private
-//
-//   attr_reader :sets
-//   attr_accessor :hand
 //
 //   def ranks_in_hand
 //     hand.map(&:rank).uniq

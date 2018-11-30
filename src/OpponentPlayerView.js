@@ -1,6 +1,7 @@
-class PlayerView {
-  constructor(player) {
+class OpponentPlayerView {
+  constructor(player, callBack) {
     this._player = player
+    this._callBack = callBack
   }
 
   player() {
@@ -10,21 +11,12 @@ class PlayerView {
   card() {
     return document.getElementById(`${this.player().name()}-hand`)
   }
-  onCardClick(e) {
-    if (e.target.classList.contains('selectable')) {
-      document.querySelectorAll('.hand-card').forEach((card) => {
-        card.classList.contains('selected-card') ? card.classList.remove('selected-card'): ''
-      })
-      e.target.classList.add('selected-card')
-    }
-    this._selectedCard = e.target.dataset.rank
-  }
 
   draw(container) {
     const playerMarkup =
     `
       <div class="player">
-        <div class="player-name">
+        <div class="player-name selectable">
           ${this.player().name()}
         </div>
         <div class="player-sets">
@@ -35,13 +27,14 @@ class PlayerView {
     `
     const element = document.createElement('div')
     element.innerHTML = playerMarkup
+    element.onclick = this._callBack.bind(this)
     container.appendChild(element)
     this._drawCard()
   }
 
   _drawCard() {
     this.player().hand().forEach((card) => {
-      const view = new CardView(card, this.onCardClick.bind(this))
+      const view = new OpponentCardView(card)
       view.draw(this.card())
     })
   }

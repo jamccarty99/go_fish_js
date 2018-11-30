@@ -11,11 +11,24 @@ class GoFishController {
   startGame(name, numberOfBots) {
     const game = new Game(name, numberOfBots)
     game.start()
-    const view = new GameView(game)
+    const view = new GameView(game, this.playRound.bind(this))
     view.draw(this.container())
   }
 
-  
+  playRound(game, player, rank) {
+    game.playRound(player, rank)
+
+    const view = new GameView(game, _selectedCard(), _selectedPlayer())
+    view.draw(this.container())
+  }
+
+  _selectedPlayer() {
+
+  }
+
+  _selectedCard() {
+
+  }
 }
 
 window.controller = new GoFishController();

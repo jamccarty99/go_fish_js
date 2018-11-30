@@ -75,40 +75,25 @@ class Game {
       this.nextPlayer();
     }
   }
+
+  playRound(player, rank) {
+    if (this.winner()) return;
+
+    player.hasAny(rank) ? this.cardTransfer(player, rank) : this.goFishing()
+    this.currentPlayer().isEmpty() ? this.goFishing() : '';
+  }
+
+  winner() {
+    return false;
+  }
 }
-//    def go_fishing
-//     return if winner
-//
-//     current_player.add_cards(deck.deal) unless deck.empty?
-//     next_player
-//   end
-//
-//   def find_player(player_name)
-//     players.find{ |player| player.name == player_name }
-//   end
-//
+
 //   def play_round(player_name, rank)
 //     return if winner
 //
 //     player = find_player(player_name)
 //     player.has_any?(rank) ? card_transfer(player, rank) : go_fishing
 //     go_fishing if current_player.empty?
-//   end
-//
-//   def as_json
-//     {
-//       'players' => players.map(&:as_json),
-//       'deck' => deck.as_json,
-//       'round' => round
-//     }
-//   end
-//
-//   def self.from_json(go_fish_json)
-//     GoFish.new(
-//       Player.collection_from_data(go_fish_json['players']),
-//       CardDeck.from_json(go_fish_json['deck']),
-//       go_fish_json['round']
-//     )
 //   end
 //
 //   def winner

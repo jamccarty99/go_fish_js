@@ -57,4 +57,16 @@ describe("Player", function() {
       expect(player.isEmpty()).toEqual(false);
     });
   });
+
+  describe("hasAny", function() {
+    it("checks if player has the rank requested", function() {
+      playerHand.push(card)
+      expect(player.hasAny()).toEqual(true);
+      player.addCards(card);
+      expect(player.hasAny()).toEqual(false);
+    });
+        joey.add_cards(card)
+        expect(joey.has_any?(card.rank)).to be(true)
+        expect(joey.has_any?('2')).to be (false)
+  });
 });
